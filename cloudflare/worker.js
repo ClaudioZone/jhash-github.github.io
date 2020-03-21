@@ -14,7 +14,6 @@ async function handleRequest(request) {
 
     let json = await response.json();
 
-    console.log(JSON.stringify());
     let featureArray = json.features;
     for (let feature of featureArray) {
         let attribute = feature.attributes;

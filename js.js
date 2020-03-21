@@ -2,26 +2,27 @@ let platform = new H.service.Platform({
     'apikey': '8rZVAxjaLRtxZm87BNROgq7nHm8fakKQx5K8jlxiKns'
 });
 
-// Obtain the default map types from the platform object:
 let defaultLayers = platform.createDefaultLayers();
 
-// Instantiate (and display) a map object:
 const map = new H.Map(
     document.getElementById('mapContainer'),
     defaultLayers.vector.normal.map,
     {
-        zoom: 10,
-        center: {lat: 52.5, lng: 13.4}
-
+        zoom: 6,
+        center: {
+            lat: 51.158627, lng: 10.445921
+        }
     });
+map.getBaseLayer().getProvider().setStyle(new H.map.Style(
+    'https://heremaps.github.io/maps-api-for-javascript-examples/change-style-at-load/data/dark.yaml',
+    'https://js.api.here.com/v3/3.1/styles/omv/'));
 
 const ui = H.ui.UI.createDefault(map, defaultLayers);
+new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
-// Enable the event system on the map instance:
-var mapEvents = new H.mapevents.MapEvents(map);
-
-// Instantiate the default behavior, providing the mapEvents object:
-new H.mapevents.Behavior(mapEvents);
+window.addEventListener('resize', function () {
+    map.getViewPort().resize();
+});
 
 loadData();
 
@@ -59,9 +60,9 @@ function addCase(lat, lon, radius, name, active_cases, deaths, estimated_cases, 
         radius,
         {
             style: {
-                strokeColor: 'rgba(0, 0, 0, 0.6)', // Color of the perimeter
+                strokeColor: 'rgba(0, 0, 0, 0.6)',
                 lineWidth: 2,
-                fillColor: 'rgba(255, 50, 50, 0.5)'  // Color of the circle
+                fillColor: 'rgba(255, 50, 50, 0.5)'
             }
         }
     );
@@ -70,10 +71,10 @@ function addCase(lat, lon, radius, name, active_cases, deaths, estimated_cases, 
     let open = false;
     let bubble = new H.ui.InfoBubble({lng: lon, lat: lat}, {
         content: "<b>" + name + "</b> " +
-            "<p>Aktive Fälle (bestätigt): " + active_cases + "</p>" +
-            "<p>Dunkelziffer: " + estimated_cases + "</p>" +
-            "<p>Bestätigte Tode: " + deaths + "</p>" +
-            "<p>Zuletzt aktualisiert: " + lastUpdated.toLocaleString() + "</p>"
+            "<p>Aktive Fälle (bestätigt): <b>" + active_cases + "</b></p>" +
+            "<p>Dunkelziffer: <b>" + estimated_cases + "</b></p>" +
+            "<p>Bestätigte Tode: <b>" + deaths + "</b></p>" +
+            "<p>Zuletzt aktualisiert: <b>" + lastUpdated.toLocaleString() + "</b></p>"
     });
     bubble.close();
     ui.addBubble(bubble);
