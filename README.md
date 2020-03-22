@@ -69,5 +69,5 @@ Auf http://jhash-github.github.io/ gibt es eine Beispielanwendung in Form einer 
   }
   ```
 
-### WirVsVirus
-Die API entstand im Rahmen des WirVsVirus Hackathon 2020 (https://wirvsvirushackathon.org/).
+### #WirVsVirus
+Die API entstand im Rahmen des #WirVsVirus Hackathon 2020 (https://wirvsvirushackathon.org/).
